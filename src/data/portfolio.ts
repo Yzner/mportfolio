@@ -63,7 +63,6 @@ export const skills = {
     { name: "VS Code" },
     { name: "Postman" },
     { name: "Procreate" },
-    { name: "Wacom Tablet" },
     { name: "PhotoShop" },
     { name: "Canva" },
     { name: "IbisPaint" },

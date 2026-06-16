@@ -192,7 +192,7 @@ export default function Hero() {
               }}
             >
               <p className="text-xs font-medium" style={{ color: "rgb(var(--theme-text-subtle))" }}>Experience</p>
-              <p className="font-bold text-sm" style={{ color: "rgb(var(--theme-text))" }}>4+ Years</p>
+              <p className="font-bold text-sm" style={{ color: "rgb(var(--theme-text))" }}>1+ Years</p>
             </motion.div>
             <motion.div
               animate={{ y: [4, -4, 4] }}

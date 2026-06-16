@@ -312,7 +312,7 @@ export default function Projects() {
               GitHub
             </a>
             <a
-              href="https://drive.google.com/drive/folders/1xkePN8PxEpJhSuIKsglD4oFFomdbzw-j"
+              href="https://drive.google.com"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline inline-flex items-center gap-2"

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { HiMenu, HiX, HiCode } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -46,18 +47,22 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-gray-950/90 backdrop-blur-md border-b border-gray-800/60 shadow-xl"
+          ? "backdrop-blur-md shadow-xl"
           : "bg-transparent"
       }`}
+      style={scrolled ? {
+        backgroundColor: "rgb(var(--theme-overlay) / 0.9)",
+        borderBottom: "1px solid rgb(var(--theme-border) / 0.6)",
+      } : undefined}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+            <div className="w-8 h-8 theme-gradient-badge rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
               <HiCode className="w-4 h-4 text-white" />
             </div>
-            <span className="font-bold text-white text-lg tracking-tight">
+            <span className="font-bold text-lg tracking-tight" style={{ color: "rgb(var(--theme-text))" }}>
               Yzner<span className="gradient-text">.dev</span>
             </span>
           </a>
@@ -69,31 +74,36 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 className={`nav-link relative py-1 ${
-                  active === link.href.slice(1) ? "text-cyan-400" : ""
+                  active === link.href.slice(1) ? "theme-text" : ""
                 }`}
               >
                 {link.label}
                 {active === link.href.slice(1) && (
                   <motion.span
                     layoutId="nav-underline"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full theme-underline"
                   />
                 )}
               </a>
             ))}
+            <ThemeSwitcher />
             <a href="#contact" className="btn-primary text-sm py-2 px-5">
               Hire Me
             </a>
           </nav>
 
           {/* Mobile toggle */}
-          <button
-            className="md:hidden text-gray-400 hover:text-white transition-colors"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeSwitcher />
+            <button
+              className="transition-colors"
+              style={{ color: "rgb(var(--theme-text-muted))" }}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -105,7 +115,11 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-gray-950/95 backdrop-blur-md border-b border-gray-800"
+            className="md:hidden backdrop-blur-md"
+            style={{
+              backgroundColor: "rgb(var(--theme-overlay) / 0.95)",
+              borderBottom: "1px solid rgb(var(--theme-border))",
+            }}
           >
             <nav className="flex flex-col px-4 pb-4 pt-2 gap-1">
               {navLinks.map((link) => (
@@ -113,11 +127,17 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`py-3 px-4 rounded-xl text-sm font-medium transition-colors ${
-                    active === link.href.slice(1)
-                      ? "text-cyan-400 bg-gray-800/60"
-                      : "text-gray-300 hover:text-white hover:bg-gray-800/40"
-                  }`}
+                  className="py-3 px-4 rounded-xl text-sm font-medium transition-colors"
+                  style={{
+                    color:
+                      active === link.href.slice(1)
+                        ? "rgb(var(--theme-primary-400))"
+                        : "rgb(var(--theme-text-muted))",
+                    backgroundColor:
+                      active === link.href.slice(1)
+                        ? "rgb(var(--theme-bg-card) / 0.6)"
+                        : "transparent",
+                  }}
                 >
                   {link.label}
                 </a>

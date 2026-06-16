@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { HiMenu, HiX, HiCode } from "react-icons/hi";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaCode, FaHeart, FaArrowUp } from "react-icons/fa";
+import { personal } from "../data/portfolio";
 
-const navLinks = [
+const quickLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
@@ -11,128 +11,153 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState("");
+const socialLinks = [
+  { icon: FaGithub, href: personal.social.github, label: "GitHub" },
+  { icon: FaLinkedin, href: personal.social.linkedin, label: "LinkedIn" },
+  { icon: FaTwitter, href: personal.social.twitter, label: "Twitter" },
+  { icon: FaInstagram, href: personal.social.instagram, label: "Instagram" },
+];
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = navLinks.map((l) => l.href.slice(1));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { threshold: 0.4 }
-    );
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
-
+export default function Footer() {
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-gray-950/90 backdrop-blur-md border-b border-gray-800/60 shadow-xl"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-              <HiCode className="w-4 h-4 text-white" />
-            </div>
-            <span className="font-bold text-white text-lg tracking-tight">
-              Yzner<span className="gradient-text">.dev</span>
-            </span>
-          </a>
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className={`nav-link relative py-1 ${
-                  active === link.href.slice(1) ? "text-cyan-400" : ""
-                }`}
-              >
-                {link.label}
-                {active === link.href.slice(1) && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
-                  />
-                )}
-              </a>
-            ))}
-            <a href="#contact" className="btn-primary text-sm py-2 px-5">
-              Hire Me
+    <footer style={{ backgroundColor: "rgb(var(--theme-bg-card) / 0.6)", borderTop: "1px solid rgb(var(--theme-border))" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid md:grid-cols-3 gap-10 mb-10">
+          {/* Brand */}
+          <div className="space-y-4">
+            <a href="#" className="flex items-center gap-2 w-fit">
+              <div className="w-8 h-8 theme-gradient-badge rounded-lg flex items-center justify-center">
+                <FaCode className="w-4 h-4 text-white" />
+              </div>
+              <span className="font-bold text-lg" style={{ color: "rgb(var(--theme-text))" }}>
+                Yzner<span className="gradient-text">.dev</span>
+              </span>
             </a>
-          </nav>
-
-          {/* Mobile toggle */}
-          <button
-            className="md:hidden text-gray-400 hover:text-white transition-colors"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden bg-gray-950/95 backdrop-blur-md border-b border-gray-800"
-          >
-            <nav className="flex flex-col px-4 pb-4 pt-2 gap-1">
-              {navLinks.map((link) => (
+            <p className="text-sm leading-relaxed max-w-xs" style={{ color: "rgb(var(--theme-text-muted))" }}>
+              Building beautiful, performant web experiences. Open to full-time roles and freelance projects.
+            </p>
+            <div className="flex items-center gap-3">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`py-3 px-4 rounded-xl text-sm font-medium transition-colors ${
-                    active === link.href.slice(1)
-                      ? "text-cyan-400 bg-gray-800/60"
-                      : "text-gray-300 hover:text-white hover:bg-gray-800/40"
-                  }`}
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 flex items-center justify-center rounded-lg transition-all duration-200 hover:-translate-y-0.5"
+                  style={{
+                    backgroundColor: "rgb(var(--theme-bg-card))",
+                    border: "1px solid rgb(var(--theme-border-subtle))",
+                    color: "rgb(var(--theme-text-muted))",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "rgb(var(--theme-primary-400))";
+                    e.currentTarget.style.borderColor = "rgb(var(--theme-primary) / 0.6)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgb(var(--theme-text-muted))";
+                    e.currentTarget.style.borderColor = "rgb(var(--theme-border-subtle))";
+                  }}
                 >
-                  {link.label}
+                  <Icon className="w-3.5 h-3.5" />
                 </a>
               ))}
-              <a
-                href="#contact"
-                onClick={() => setMenuOpen(false)}
-                className="btn-primary text-center mt-2"
-              >
-                Hire Me
-              </a>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+            </div>
+          </div>
+
+          {/* Quick links */}
+          <div>
+            <h4 className="font-semibold text-sm mb-4 tracking-wide uppercase" style={{ color: "rgb(var(--theme-text))" }}>
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm transition-colors duration-200 flex items-center gap-1.5 group"
+                    style={{ color: "rgb(var(--theme-text-muted))" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "rgb(var(--theme-primary-400))")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgb(var(--theme-text-muted))")}
+                  >
+                    <span
+                      className="w-0 group-hover:w-3 h-px transition-all duration-200 overflow-hidden"
+                      style={{ backgroundColor: "rgb(var(--theme-primary-400))" }}
+                    />
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact info */}
+          <div>
+            <h4 className="font-semibold text-sm mb-4 tracking-wide uppercase" style={{ color: "rgb(var(--theme-text))" }}>
+              Contact
+            </h4>
+            <ul className="space-y-2.5 text-sm" style={{ color: "rgb(var(--theme-text-muted))" }}>
+              <li>
+                <a
+                  href={`mailto:${personal.email}`}
+                  className="transition-colors"
+                  style={{ color: "rgb(var(--theme-text-muted))" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "rgb(var(--theme-primary-400))")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgb(var(--theme-text-muted))")}
+                >
+                  {personal.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${personal.phone}`}
+                  className="transition-colors"
+                  style={{ color: "rgb(var(--theme-text-muted))" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "rgb(var(--theme-primary-400))")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgb(var(--theme-text-muted))")}
+                >
+                  {personal.phone}
+                
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${personal.phone}`}
+                  className="transition-colors"
+                  style={{ color: "rgb(var(--theme-text-muted))" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "rgb(var(--theme-primary-400))")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgb(var(--theme-text-muted))")}
+                >
+                  {personal.location}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+          style={{ borderTop: "1px solid rgb(var(--theme-border))" }}
+        >
+          <p className="text-sm flex items-center gap-1.5" style={{ color: "rgb(var(--theme-text-subtle))" }}>
+            &copy; {new Date().getFullYear()} {personal.name}. Made with
+            <FaHeart className="w-3 h-3" style={{ color: "rgb(239 68 68)" }} />
+            and lots of coffee.
+          </p>
+          <motion.a
+            href="#"
+            whileHover={{ y: -2 }}
+            className="flex items-center gap-1.5 text-sm font-medium transition-colors duration-200"
+            style={{ color: "rgb(var(--theme-text-subtle))" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "rgb(var(--theme-primary-400))")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgb(var(--theme-text-subtle))")}
+          >
+            Back to top
+            <FaArrowUp className="w-3 h-3" />
+          </motion.a>
+        </div>
+      </div>
+    </footer>
   );
 }

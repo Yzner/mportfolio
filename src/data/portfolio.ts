@@ -1,7 +1,7 @@
 export const personal = {
   name: "Lorenz Lucio",
-  title: "Full Stack Developer",
-  tagline: "I build fast, scalable, and beautiful web applications.",
+  title: "Software Developer & Graphic Designer",
+  tagline: "Developer by logic, designer by creativity.",
   bio: "I'm a passionate full-stack developer with 1+ years of experience crafting high-performance web applications. I love turning complex problems into elegant, user-friendly solutions. When I'm not coding, I'm exploring new technologies, contributing to open source, or writing about software engineering.",
   email: "llorenz.10022002@gmail.com",
   phone: "(+63)910-495-2354",
@@ -110,7 +110,7 @@ export const demoLabels: Record<DemoType, string> = {
   tiktok: "Watch on TikTok",
   canva: "View on Canva",
   googleDrive: "View on Drive",
-  website: "View on Google"
+  website: "View on Google",
 };
 
 export const projects = [
@@ -131,7 +131,7 @@ export const projects = [
     ],
   },
   {
-    id: 5,
+    id: 2,
     title: "3D Portfolio",
     description:
       "I created an interactive 3D portfolio to showcase my projects in a more engaging and modern way, focusing on user experience and visual presentation. This project was also a personal initiative to explore and practice 3D web development. I used React.js for building the user interface and Three.js for rendering and managing 3D graphics, animations, and interactive elements in the browser. I built it during a time when I had no active tasks, as a way to explore other JavaScript technologies such as Three.js and expand my skills beyond standard frontend development. Through this project, I strengthened my understanding of 3D rendering concepts, frontend architecture, and performance optimization while improving my ability to create immersive and interactive web experiences.",
@@ -146,35 +146,175 @@ export const projects = [
     ],
   },
   {
-    id: 6,
-    title: "Digital Art",
+    id: 3,
+    title: "Product Label",
     description:
-      "Vibrant digital artwork created using professional illustration tools — spanning fantasy landscapes, abstract compositions, and stylized character illustrations with bold color palettes.",
+      "A premium, minimalist product label designed for Liquid Gold Nipa Syrup, an all-natural sweetener sourced from Quezon, Palawan. The design aims to elevate a traditional Filipino agricultural product into a high-end, export-quality brand that looks at home on both local boutique shelves and international market displays.",
     image:
-      "https://images.pexels.com/photos/19694594/pexels-photo-19694594.jpeg?auto=compress&cs=tinysrgb&w=800",
-    technologies: ["Procreate", "Photoshop", "Wacom Tablet", "Digital Painting"],
-    category: "creative" as ProjectCategory,
+      "https://i.postimg.cc/8zgQ76gJ/Copy-of-Why-Choose-Nipa-Palm-Syrup.png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["canva"],
+    category: "design" as ProjectCategory,
     featured: true,
     demos: [
-      { type: "tiktok" as DemoType, url: "https://tiktok.com" },
-      { type: "googleDrive" as DemoType, url: "https://drive.google.com" },
+      { type: "tiktok" as DemoType, url: "https://www.tiktok.com/@lnkprintstechhub/photo/7612069346071891208?lang=en" },
+    ],
+  },
+  {
+    id: 4,
+    title: "Tarpaulin Menus",
+    description:
+      "A vibrant, highly organized 2x3 foot tarpaulin menu board designed for Vah-ers Snack House. The primary design challenge was to fit an extensive, diverse menu—ranging from beverages to heavy snacks and combo meals—into a single, cohesive, and easily readable layout without overwhelming the customer at the point of sale.",
+    image:
+      "https://i.postimg.cc/8z5Dm7mB/2X3-TARP.png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["Canva", "IbisPaint"],
+    category: "design" as ProjectCategory,
+    featured: false,
+    demos: [
+      { type: "googleDrive" as DemoType, url: "https://drive.google.com/drive/folders/1vf7MqOncKKtCVDL_4PEAMoNf0i9fQfNS" },
+    ],
+  },
+  {
+    id: 5,
+    title: "Dishwashing Label",
+    description:
+      "A vibrant, energetic product label designed for Bunso Dishwashing Liquid. The design focuses on conveying intense freshness, cleanliness, and powerful degreasing action. It captures a friendly, household-trusted aesthetic while emphasizing competitive product benefits directly on the front facing.",
+    image:
+      "https://i.postimg.cc/8z5Dm7mq/Blue-and-Green-Playful-Dishwashing-Label.png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["Canva"],
+    category: "design" as ProjectCategory,
+    featured: false,
+    demos: [
+      { type: "googleDrive" as DemoType, url: "https://drive.google.com/drive/folders/11ZKugil3AIS83HxpQLbAy-Eqg4Qd-oGD" },
+    ],
+  },
+  {
+    id: 6,
+    title: "Tarpaulin Menus",
+    description:
+      "A highly appetizing, texture-rich 2x3 foot promotional tarpaulin designed for Coffee Trio to introduce their new line of Iced SubOats Drinks. The design strategically co-brands with Oatside Oatmilk to leverage brand trust, using warm, milky visuals and dynamic product splashes to drive immediate cravings and impulse purchases.",
+    image:
+      "https://i.postimg.cc/Cx1YsRs6/2X3-TARP-(1).png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["Canva"],
+    category: "design" as ProjectCategory,
+    featured: false,
+    demos: [
+      { type: "googleDrive" as DemoType, url: "https://drive.google.com/drive/folders/1vf7MqOncKKtCVDL_4PEAMoNf0i9fQfNS" },
     ],
   },
   {
     id: 7,
-    title: "Character Drawings",
+    title: "Tarpaulin menu",
     description:
-      "Original character designs and drawings featuring unique personalities, dynamic poses, and expressive features — from concept sketches to fully rendered character sheets.",
+      "A vibrant, culturally rich 2x3 foot promotional tarpaulin designed for Mubaarak Eatery to showcase their signature value meal: Chicken Pastil with Java Rice. The design combines a bold, appetite-stimulating color field with elegant, traditional filigree elements to create an upscale yet highly affordable street-food brand identity.",
     image:
-      "https://images.pexels.com/photos/3783385/pexels-photo-3783385.jpeg?auto=compress&cs=tinysrgb&w=800",
-    technologies: ["Ink", "Markers", "Digital Inking", "Character Design"],
-    category: "creative" as ProjectCategory,
+      "https://i.postimg.cc/nhzZGXGP/2X3-TARP-(2).png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["Canva"],
+    category: "design" as ProjectCategory,
     featured: false,
     demos: [
-      { type: "tiktok" as DemoType, url: "https://tiktok.com" },
+      { type: "googleDrive" as DemoType, url: "https://drive.google.com/drive/folders/1vf7MqOncKKtCVDL_4PEAMoNf0i9fQfNS" },
+    ],
+  },
+  {
+    id: 8,
+    title: "Tarpaulin Outing",
+    description:
+      "A vibrant, beach-themed corporate event graphic designed for South Seas Cargo Forwarders, Inc. (Palawan Branch) to announce their Summer Company Outing 2026. The layout balances the professional corporate identity of a logistics firm with a fun, tropical, and relaxing aesthetic, generating team excitement for the upcoming company event.",
+    image:
+      "https://i.postimg.cc/RZF9LWL2/COMPANY.png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["Canva"],
+    category: "design" as ProjectCategory,
+    featured: false,
+    demos: [
+      { type: "googleDrive" as DemoType, url: "https://drive.google.com/drive/folders/1vf7MqOncKKtCVDL_4PEAMoNf0i9fQfNS" },
+    ],
+  },
+  {
+    id: 9,
+    title: "Business Card",
+    description:
+      "A sharp, industrial-themed business card designed for RS Hardware & Trading. The layout balances a clean, professional corporate aesthetic with strong geometric elements that reflect the stability, structure, and reliability of the hardware and construction trading industry.",
+    image:
+      "https://i.postimg.cc/FHRmVYVC/RS-Hardware-Trading.png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["Canva"],
+    category: "design" as ProjectCategory,
+    featured: false,
+    demos: [
+      { type: "tiktok" as DemoType, url: "https://www.tiktok.com/@lnkprintstechhub/video/7576689987677080850?lang=en" },
+    ],
+  },
+  {
+    id: 10,
+    title: "Menus",
+    description:
+      "A bold, appetite-stimulating promotional menu poster designed for Burger Attack. The layout focuses on intense, fast-casual food imagery, utilizing a classic hunger-inducing color scheme paired with dynamic splash graphics to draw immediate attention to the brand's signature burgers and special side offerings.",
+    image:
+      "https://i.postimg.cc/Cx3MNjLD/MENUS-(1).png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["Canva"],
+    category: "design" as ProjectCategory,
+    featured: false,
+    demos: [
+      { type: "googleDrive" as DemoType, url: "https://drive.google.com/drive/folders/1vf7MqOncKKtCVDL_4PEAMoNf0i9fQfNS" },
+    ],
+  },
+  // {
+  //   id: 7,
+  //   title: "Character Drawings",
+  //   description:
+  //     "Original character designs and drawings featuring unique personalities, dynamic poses, and expressive features — from concept sketches to fully rendered character sheets.",
+  //   image:
+  //     "https://i.postimg.cc/6qv8Wvnf/A-ddres-s-Pu-rok-L-a-nz-on-e-s-B-ar-an-ga-y-Si-csi-ca-n-PP-C-C-on-t-a-ct-Nu-m-b-er-0-9-3-0-9-0-0.png?auto=compress&cs=tinysrgb&w=800",
+  //   technologies: ["Ink", "Markers", "Digital Inking", "Character Design"],
+  //   category: "creative" as ProjectCategory,
+  //   featured: false,
+  //   demos: [
+  //     { type: "tiktok" as DemoType, url: "https://tiktok.com" },
+  //     { type: "googleDrive" as DemoType, url: "https://drive.google.com" },
+  //   ],
+  // },
+  // {
+  //   id: 7,
+  //   title: "Logo",
+  //   description:
+  //     "Original character designs and drawings featuring unique personalities, dynamic poses, and expressive features — from concept sketches to fully rendered character sheets.",
+  //   image:
+  //     "https://i.postimg.cc/mkY9snxs/2.png?auto=compress&cs=tinysrgb&w=800",
+  //   technologies: ["Canva", "Photoshop"],
+  //   category: "design" as ProjectCategory,
+  //   featured: false,
+  //   demos: [
+  //     { type: "googleDrive" as DemoType, url: "https://drive.google.com" },
+  //   ],
+  // },
+  // {
+  //   id: 7,
+  //   title: "Logo",
+  //   description:
+  //     "A charming, highly engaging circular sticker label designed for an artisanal local snack brand specializing in all-natural Purple Kamote Chips. The design moves away from rigid corporate branding, utilizing playful hand-drawn typography and an adorable mascot illustration to establish a warm, homegrown, and trustworthy snack identity.",
+  //   image:
+  //     "https://i.postimg.cc/FF333YY8/1.png?auto=compress&cs=tinysrgb&w=800",
+  //   technologies: ["Canva", "Photoshop"],
+  //   category: "design" as ProjectCategory,
+  //   featured: false,
+  //   demos: [
+  //     { type: "googleDrive" as DemoType, url: "https://drive.google.com" },
+  //   ],
+  // },
+  {
+    id: 11,
+    title: "Logo Sticker Label",
+    description:
+      "A charming, highly engaging circular sticker label designed for an artisanal local snack brand specializing in all-natural Purple Kamote Chips. The design moves away from rigid corporate branding, utilizing playful hand-drawn typography and an adorable mascot illustration to establish a warm, homegrown, and trustworthy snack identity.",
+    image:
+      "https://i.postimg.cc/pTmkRsTQ/Untitled-design-(4).png?auto=compress&cs=tinysrgb&w=800",
+    technologies: ["Canva", "Photoshop"],
+    category: "Design" as ProjectCategory,
+    featured: false,
+    demos: [
       { type: "googleDrive" as DemoType, url: "https://drive.google.com" },
     ],
   },
+  
 ];
 
 // export const projects = [

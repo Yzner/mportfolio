@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { FaGithub, FaStar, FaChevronDown, FaChevronUp, FaGoogleDrive, FaTiktok, FaGlobe } from "react-icons/fa";
+import { FaGithub, FaStar, FaChevronDown, FaChevronUp, FaGoogleDrive, FaTiktok } from "react-icons/fa";
 import { SiCanva } from "react-icons/si";
 import { projects, projectCategories, type ProjectCategory, type DemoType, demoLabels } from "../data/portfolio";
 
@@ -9,15 +9,23 @@ const demoIcons: Record<DemoType, React.ReactNode> = {
   tiktok: <FaTiktok className="w-3.5 h-3.5" />,
   canva: <SiCanva className="w-3.5 h-3.5" />,
   googleDrive: <FaGoogleDrive className="w-3.5 h-3.5" />,
-  website: <FaGlobe className="w-3.5 h-3.5" />,
+  website: <FaStar className="w-3.5 h-3.5" />, // or FaGlobe
 };
 
 const demoColors: Record<DemoType, string> = {
-  github: "text-gray-400 hover:text-white",
-  tiktok: "text-pink-400 hover:text-pink-300",
-  canva: "text-cyan-400 hover:text-cyan-300",
-  googleDrive: "text-emerald-400 hover:text-emerald-300",
-  website: "text-blue-400 hover:text-blue-300",
+  github: "rgb(var(--color-text-muted))",
+  tiktok: "rgb(244 114 182)",
+  canva: "rgb(var(--color-primary-400))",
+  googleDrive: "rgb(52 211 153)",
+  website: "rgb(59 130 246)", // blue
+};
+
+const demoHoverColors: Record<DemoType, string> = {
+  github: "rgb(var(--color-text))",
+  tiktok: "rgb(249 168 212)",
+  canva: "rgb(var(--color-primary-light))",
+  googleDrive: "rgb(110 231 183)",
+  website: "rgb(96 165 250)",
 };
 
 function ProjectCard({
@@ -39,7 +47,14 @@ function ProjectCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, scale: 0.95 }}
       transition={{ duration: 0.4, delay: index * 0.06 }}
-      className={`card-base group overflow-hidden hover:${category.borderColor} hover:-translate-y-1 hover:shadow-2xl transition-all duration-300`}
+      className="card-base group overflow-hidden hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
+      style={{ borderColor: undefined }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = category.borderColor.replace("border-", "").replace(/\/.*/, "");
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "";
+      }}
     >
       {/* Image */}
       <div className="relative h-48 overflow-hidden">
@@ -48,22 +63,46 @@ function ProjectCard({
           alt={project.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to top, rgb(var(--theme-bg-card)), rgb(var(--theme-bg-card) / 0.2), transparent)",
+          }}
+        />
         {project.featured && (
-          <div className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 bg-amber-500/20 border border-amber-500/40 rounded-full text-amber-400 text-xs font-medium backdrop-blur-sm">
+          <div
+            className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
+            style={{
+              backgroundColor: "rgb(var(--theme-accent-amber) / 0.2)",
+              border: "1px solid rgb(var(--theme-accent-amber) / 0.4)",
+              color: "rgb(251 191 36)",
+            }}
+          >
             <FaStar className="w-3 h-3" />
             Featured
           </div>
         )}
         {/* Category badge */}
-        <div className="absolute top-3 left-3 px-2.5 py-1 bg-gray-900/70 border border-gray-700/50 rounded-full text-xs font-medium backdrop-blur-sm text-gray-300">
+        <div
+          className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
+          style={{
+            backgroundColor: "rgb(var(--theme-overlay) / 0.7)",
+            border: "1px solid rgb(var(--theme-border-subtle) / 0.5)",
+            color: "rgb(var(--theme-text-muted))",
+          }}
+        >
           {category.icon} {category.label}
         </div>
       </div>
 
       {/* Content */}
       <div className="p-6 space-y-4">
-        <h3 className="text-white font-bold text-lg group-hover:text-cyan-400 transition-colors duration-200">
+        <h3
+          className="font-bold text-lg transition-colors duration-200"
+          style={{ color: "rgb(var(--theme-text))" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "rgb(var(--theme-primary-400))")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgb(var(--theme-text))")}
+        >
           {project.title}
         </h3>
 
@@ -72,14 +111,15 @@ function ProjectCard({
           <motion.p
             initial={false}
             animate={{ height: expanded ? "auto" : "2.5rem" }}
-            className="text-gray-400 text-sm leading-relaxed overflow-hidden"
+            className="text-sm leading-relaxed text-justify overflow-hidden"
+            style={{ color: "rgb(var(--theme-text-muted))" }}
           >
             {project.description}
           </motion.p>
           {isLong && (
             <button
               onClick={() => setExpanded(!expanded)}
-              className="flex items-center gap-1 text-cyan-400 hover:text-cyan-300 text-xs font-medium mt-1 transition-colors"
+              className="flex items-center gap-1 theme-text text-xs font-medium mt-1 transition-colors"
             >
               {expanded ? (
                 <>
@@ -115,7 +155,10 @@ function ProjectCard({
                 href={demo.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center gap-1.5 text-sm font-medium transition-all duration-200 hover:gap-2 ${demoColors[demo.type]}`}
+                className="flex items-center gap-1.5 text-sm font-medium transition-all duration-200 hover:gap-2"
+                style={{ color: demoColors[demo.type] }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = demoHoverColors[demo.type])}
+                onMouseLeave={(e) => (e.currentTarget.style.color = demoColors[demo.type])}
               >
                 {demoIcons[demo.type]}
                 {demoLabels[demo.type]}
@@ -154,12 +197,12 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="mb-12 text-center"
         >
-          <p className="text-cyan-400 font-mono text-sm font-medium mb-2 tracking-widest uppercase">
+          <p className="theme-text font-mono text-sm font-medium mb-2 tracking-widest uppercase">
             Things I've built & created
           </p>
           <h2 className="section-heading">Projects</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full mx-auto mt-4 mb-6" />
-          <p className="text-gray-400 max-w-xl mx-auto">
+          <div className="w-16 h-1 rounded-full mx-auto mt-4 mb-6 theme-gradient-bar" />
+          <p style={{ color: "rgb(var(--theme-text-muted))" }} className="max-w-xl mx-auto">
             From software engineering to creative artwork and graphic design — explore my work across different disciplines.
           </p>
         </motion.div>
@@ -171,14 +214,21 @@ export default function Projects() {
           transition={{ delay: 0.2 }}
           className="flex justify-center mb-10"
         >
-          <div className="flex flex-wrap justify-center bg-gray-900 border border-gray-800 rounded-xl p-1.5 gap-1">
+          <div
+            className="flex flex-wrap justify-center rounded-xl p-1.5 gap-1"
+            style={{
+              backgroundColor: "rgb(var(--theme-bg-card))",
+              border: "1px solid rgb(var(--theme-border))",
+            }}
+          >
             <button
               onClick={() => setActiveCategory("all")}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                activeCategory === "all"
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/20"
-                  : "text-gray-400 hover:text-white"
-              }`}
+              className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+              style={{
+                background: activeCategory === "all" ? "linear-gradient(to right, rgb(var(--theme-primary)), rgb(var(--theme-primary-end)))" : undefined,
+                color: activeCategory === "all" ? "white" : "rgb(var(--theme-text-muted))",
+                boxShadow: activeCategory === "all" ? "0 4px 20px rgb(var(--theme-primary) / 0.2)" : undefined,
+              }}
             >
               All
             </button>
@@ -186,11 +236,11 @@ export default function Projects() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeCategory === cat.id
-                    ? `bg-gradient-to-r ${cat.accent} text-white shadow-lg`
-                    : "text-gray-400 hover:text-white"
-                }`}
+                className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                style={{
+                  background: activeCategory === cat.id ? `linear-gradient(to right, ${cat.accent.replace("from-", "").replace("to-", "")})` : undefined,
+                  color: activeCategory === cat.id ? "white" : "rgb(var(--theme-text-muted))",
+                }}
               >
                 <span className="mr-1.5">{cat.icon}</span>
                 {cat.label}
@@ -210,14 +260,14 @@ export default function Projects() {
             className="text-center mb-8"
           >
             {activeCategory === "all" ? (
-              <p className="text-gray-500 text-sm">
+              <p className="text-sm" style={{ color: "rgb(var(--theme-text-subtle))" }}>
                 Showing all {projects.length} projects across all categories
               </p>
             ) : (
-              <p className="text-gray-500 text-sm">
+              <p className="text-sm" style={{ color: "rgb(var(--theme-text-subtle))" }}>
                 {projectCategories.find((c) => c.id === activeCategory)?.icon}{" "}
                 {filtered.length} project{filtered.length !== 1 ? "s" : ""} in{" "}
-                <span className="text-gray-300 font-medium">
+                <span className="font-medium" style={{ color: "rgb(var(--theme-text-muted))" }}>
                   {projectCategories.find((c) => c.id === activeCategory)?.label}
                 </span>
               </p>
@@ -250,7 +300,7 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="text-center mt-12 space-y-4"
         >
-          <p className="text-gray-400">Want to see more?</p>
+          <p style={{ color: "rgb(var(--theme-text-muted))" }}>Want to see more?</p>
           <div className="flex flex-wrap justify-center gap-3">
             <a
               href="https://github.com/Yzner"
@@ -262,7 +312,7 @@ export default function Projects() {
               GitHub
             </a>
             <a
-              href="https://drive.google.com/drive/folders/1xkePN8PxEpJhSuIKsglD4oFFomdbzw-j?usp=drive_link"
+              href="https://drive.google.com/drive/folders/1xkePN8PxEpJhSuIKsglD4oFFomdbzw-j"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline inline-flex items-center gap-2"
@@ -271,7 +321,7 @@ export default function Projects() {
               Google Drive
             </a>
             <a
-              href="https://www.tiktok.com/@lnkprintstechhub?_r=1&_t=ZS-96hNR8KB03o"
+              href="https://www.tiktok.com/@lnkprintstechhub?_r=1&_t=ZS-97FDpKbjNw5"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline inline-flex items-center gap-2"
